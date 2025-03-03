@@ -1,0 +1,16 @@
+{
+    "games": [
+        {
+            "id": "1",
+            "title": "Super Mario 64",
+            "year": 1996,
+            "played": true
+        },
+        {
+            "id": "2",
+            "title": "The Legend Of Zelda: Ocarina Of Time",
+            "year": 1998,
+            "played": true
+        }
+    ]
+}

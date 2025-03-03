@@ -1,0 +1,16 @@
+{
+  "name": "projeto-com-javascript-que-fiz-sozinha",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server",
+    "json:server":"npx json-server -p 3500 ./data/db.json -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3",
+    "live-server": "^1.2.2"
+  }
+}

@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(129, 127, 255);
+}
+
+.container{
+    display: block;
+    background-color: rgb(182, 184, 185);
+    height: 500px;
+    width: 350px;
+    border: 2px solid rgb(7, 14, 102);
+    border-radius: 10px;
+    text-align: center;
+    padding: 60px;
+    
+}
+
+.container h1{
+    color: palevioletred;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+p{
+    color: blueviolet;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#superMario{
+    margin-bottom: 30px;
+}
+
