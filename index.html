@@ -11,23 +11,20 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
     crossorigin="anonymous">
 
-    <script src="index.js" defer></script>
+    <script src="dist/main.js" type="module" defer></script>
 </head>
 <body>
     <div class="container">
         <h1>Consulta de Jogos</h1>
-        <form id="jogos">
         <p>LISTA DE JOGOS</p>
-        <button type="submit" class="btn btn-dark" id="jogos-btn">Jogos</button>
         <div id="resultadoBuscaJogos"></div>
-        </form>
-        <form id="dados-jogos" class="hide">
-        <p>ESCOLHA SEU JOGO PREFERIDO</p>
-        <button type="submit" class="btn btn-dark" id="superMario">Super Mario 64</button>
-        <div id="resultadoSuperMario"></div>
-        <button type="submit" class="btn btn-dark" id="zelda">The Legend Of Zelda</button>
-        <div id="resultadoZelda"></div>
-        </form>
     </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="list-group-item">&times;</span>
+            <p>Este é um modal de exemplo!</p>
+        </div>
+    </div>
+
 </body>
 </html>

@@ -4,13 +4,15 @@
   "main": "index.html",
   "scripts": {
     "start": "npx live-server",
-    "json:server":"npx json-server -p 3500 ./data/db.json -w"
+    "json:server": "npx json-server -p 3500 ./data/db.json -w", 
+    "compile:typescript":"npx tsc -w"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "json-server": "^1.0.0-beta.3",
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "typescript": "^5.8.2"
   }
 }
