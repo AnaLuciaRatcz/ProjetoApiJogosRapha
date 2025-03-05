@@ -52,6 +52,7 @@
     const modal = document.getElementById("myModal");
     if (modal) {
         modal.style.display = "block";
+    
     }
 }
 
@@ -80,9 +81,6 @@ window.addEventListener("click", (event) => {
 
   
 
-// Seleciona o modal e o botão de abrir
-const modal = document.getElementById("myModal");
-const openModalBtn = document.querySelector(".list-group-item");
-const closeModalBtn = document.getElementById("closeModalBtn");
+
 
 
