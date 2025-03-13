@@ -14,17 +14,45 @@
     <script src="dist/main.js" type="module" defer></script>
 </head>
 <body>
-    <div class="container">
+    <div class="meuContainer">
         <h1>Consulta de Jogos</h1>
+        <button type="button" class="btn btn-dark" id="openModalBtn">JOGOS</button>
         <p>LISTA DE JOGOS</p>
         <div id="resultadoBuscaJogos"></div>
     </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="list-group-item">&times;</span>
-            <p>Este é um modal de exemplo!</p>
+            <span class="list-group-item" id="closeModalBtn">&times;</span>
+            <div id="resultadoCarregarJogo"></div>
         </div>
     </div>
+
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h2>Formulário</h2>
+        <form id="form">
+          <div>
+            <label for="nome">Name:</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div>
+            <label for="text">Year:</label>
+            <input type="text" id="ano" name="ano" required>
+          </div>
+          <div>
+          <label for="meuCheckbox">Played?</label>
+          <input type="checkbox" id="meuCheckbox" name="meuCheckbox">
+          <button type="submit">Yes</button>
+          <button type="submit">No</button>
+          </div>
+          <p id="resultado"></p>
+        </form>
+      </div>
+    </div>
+  
+
 
 </body>
 </html>

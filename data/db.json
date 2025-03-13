@@ -11,6 +11,31 @@
             "title": "The Legend Of Zelda: Ocarina Of Time",
             "year": 1998,
             "played": true
-        }
+        },
+        {
+            "id": "3",
+            "title": "The Legend of Zelda: Majora's Mask",
+            "year": 2000,
+            "played": true
+          },
+          {
+            "id": "4",
+            "title": "Super Mario Party",
+            "year": 2018,
+            "played": true
+          },
+          {
+            "id": "5",
+            "title": "Goldeneye 007",
+            "year": 1997,
+            "played": true
+          },
+          {
+            "id": "6",
+            "title": "Mario Kart 64",
+            "year": 1996,
+            "played": true
+          }
+
     ]
 }
