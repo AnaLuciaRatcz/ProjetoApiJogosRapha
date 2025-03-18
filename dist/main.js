@@ -1,6 +1,6 @@
 "use strict";
 //*CRUD
-//CREAT
+//CREATE
 //READ
 //UPDATE
 //DELETE
@@ -84,10 +84,14 @@ if (closeModalBtn) {
     });
 }
 window.addEventListener("click", (event) => {
-    const modal = document.getElementById("myModal");
+    const myModal = document.getElementById("myModal");
+    if (myModal && event.target === myModal) {
+        myModal.style.display = "none";
+        jogo = null;
+    }
+    const modal = document.getElementById("modal");
     if (modal && event.target === modal) {
         modal.style.display = "none";
-        jogo = null;
     }
 });
 carregarListaJogos().then(() => {
@@ -107,22 +111,28 @@ const form = document.getElementById('form');
 //console.log(form);
 // Função para abrir o modal
 openModalBtn.addEventListener('click', () => {
-    modal.classList.add('open');
-    console.log("clicou");
+    modal.style.display = "block";
+    //console.log("clicou");
 });
 // Função para fechar o modal
 closeModal.addEventListener('click', () => {
-    modal.classList.remove('open');
+    modal.style.display = "none";
 });
 // Função para lidar com o envio do formulário
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // Impede o envio padrão do formulário
+    if (!form.checkValidity()) {
+        event.stopPropagation();
+    }
+    form.classList.add('was-validated');
     // Captura os valores dos campos
-    const nome = document.getElementById('nome').value;
-    const ano = document.getElementById('ano').value;
+    //const nome = (document.getElementById('nome') as HTMLInputElement).value;
+    //const ano = (document.getElementById('ano') as HTMLInputElement).value;
+    const { nome, ano, jogado } = form;
     // Exibe os valores no console
-    console.log('Nome:', nome);
-    console.log('Ano:', ano);
+    console.log('Nome:', nome.value);
+    console.log('Ano:', ano.value);
+    console.log('Jogado:', jogado.value);
     // Fecha o modal após o envio
-    modal.classList.remove('open');
+    //modal.classList.remove('open');
 });

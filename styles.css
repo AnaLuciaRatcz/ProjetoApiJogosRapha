@@ -20,11 +20,6 @@ body{
     
 }
 
-.container h1{
-    color: palevioletred;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-}
-
 p{
     color: blueviolet;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -42,6 +37,15 @@ p{
 .btn btn-dark{
     margin-bottom: 100px;
 }
+
+#form, h2 {
+    margin-left: 30px;
+}
+
+#closemodal{
+    margin-left: 30px !important;
+}
+
 
 
     

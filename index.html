@@ -16,38 +16,62 @@
 <body>
     <div class="meuContainer">
         <h1>Consulta de Jogos</h1>
-        <button type="button" class="btn btn-dark" id="openModalBtn">JOGOS</button>
+        <button type="button" class="btn btn-dark" id="openModalBtn"> Formulário JOGOS</button>
         <p>LISTA DE JOGOS</p>
         <div id="resultadoBuscaJogos"></div>
     </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="list-group-item" id="closeModalBtn">&times;</span>
+            <button type="button" class="btn btn-light" style="width: 100px;" id="closeModalBtn">X</button>
             <div id="resultadoCarregarJogo"></div>
         </div>
     </div>
 
 
-    <!-- Modal -->
+    <!-- Modal formulário -->
     <div id="modal" class="modal">
       <div class="modal-content">
+        <button type="button" class="btn btn-danger" style="width: 100px;" id="closeModal">X</button>
         <h2>Formulário</h2>
-        <form id="form">
+        <form id="form" novalidate>
+            <div class="col-md-6">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+                <div class="invalid-feedback">
+                  Por favor digite o nome de um game.
+                </div>
+              </div>
+
+
+              <div class="col-md-6">
+                <label for="ano" class="form-label">Ano</label>
+                <input type="text" class="form-control" id="ano" name="ano" required>
+                <div class="invalid-feedback">
+                  Por favor digite o ano do game.
+                </div>
+              </div>
+         
+          
           <div>
-            <label for="nome">Name:</label>
-            <input type="text" id="nome" name="nome" required>
+          <label>Jogado?</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="jogado" value="Sim" id="flexRadioDefault1" required>
+            <label class="form-check-label" for="flexRadioDefault1">
+              SIM
+            </label>
           </div>
-          <div>
-            <label for="text">Year:</label>
-            <input type="text" id="ano" name="ano" required>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="jogado" value="Não" id="flexRadioDefault2" required>
+            <label class="form-check-label" for="flexRadioDefault2">
+              NÃO
+            </label>
+            <div class="invalid-feedback">Responda com sim ou não</div>
           </div>
-          <div>
-          <label for="meuCheckbox">Played?</label>
-          <input type="checkbox" id="meuCheckbox" name="meuCheckbox">
-          <button type="submit">Yes</button>
-          <button type="submit">No</button>
+
+        
           </div>
           <p id="resultado"></p>
+          <button type="submit" class="btn btn-danger">Salvar</button>
         </form>
       </div>
     </div>
