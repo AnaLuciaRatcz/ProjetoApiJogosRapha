@@ -1,6 +1,6 @@
- //*CRUD
- //CREATE
- //READ
+ //* CRUD
+ //? CREATE
+ //? READ
  //UPDATE
  //DELETE
 
@@ -29,6 +29,24 @@
    const dados = await resultado.json() as IJogo;  
    console.log("carregou o jogo", dados);
    jogo = dados;
+  }
+
+  async function salvarJogo(jogo: IJogo) {
+    if(jogo.id === ''){
+      const resposta = await fetch("http://localhost:3500/games", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: jogo.title,
+          played: jogo.played,
+          year: jogo.year,
+        }),
+      });
+      const dados = await resposta.json();
+      console.log("salvou o jogo", dados);
+    }
   }
 
 
@@ -139,7 +157,25 @@ closeModal.addEventListener('click', () => {
 form.addEventListener('submit', (event: SubmitEvent) => {
   event.preventDefault(); // Impede o envio padrão do formulário
   if (!form.checkValidity()) {
-    event.stopPropagation()
+    event.stopPropagation();
+    console.log("Formulário inváido.");
+  }else{
+    console.log("Formulário válido.");
+
+    const{nome, ano, jogado} = form;
+
+  // Exibe os valores no console
+  console.log('Nome:', nome.value);
+  console.log('Ano:', ano.value);
+  console.log('Jogado:', jogado.value);
+
+  salvarJogo({
+    id: '', 
+    title: nome.value,
+    year: Number(ano.value),
+    played: jogado.value === "Sim" ? true : false,
+  })
+
   }
 
   form.classList.add('was-validated');
@@ -148,12 +184,7 @@ form.addEventListener('submit', (event: SubmitEvent) => {
   //const nome = (document.getElementById('nome') as HTMLInputElement).value;
   //const ano = (document.getElementById('ano') as HTMLInputElement).value;
 
-  const{nome, ano, jogado} = form;
-
-  // Exibe os valores no console
-  console.log('Nome:', nome.value);
-  console.log('Ano:', ano.value);
-  console.log('Jogado:', jogado.value);
+  
 
   // Fecha o modal após o envio
   //modal.classList.remove('open');

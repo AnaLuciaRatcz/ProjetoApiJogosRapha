@@ -10,7 +10,6 @@ body{
 .meuContainer{
     
     background-color: rgb(182, 184, 185);
-    height: 600px;
     width: 400px;
     border: 2px solid rgb(7, 14, 102);
     border-radius: 10px;
@@ -42,10 +41,17 @@ p{
     margin-left: 30px;
 }
 
-#closemodal{
-    margin-left: 30px !important;
+#closeModal, 
+#closeModalBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;  
 }
-
+#myModal .modal-content #resultadoCarregarJogo p {
+    color: blue;
+    margin: 5px 10px;
+}
 
 
     
