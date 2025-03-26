@@ -15,6 +15,8 @@
   let jogo: IJogo | null = null;
 
   const resultadoJogos = document.querySelector("#resultadoBuscaJogos");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const closeModalEditBtn = document.getElementById("closeModalEdit");
 
   async function carregarListaJogos(){
    const resposta = await fetch("http://localhost:3500/games");
@@ -82,15 +84,28 @@
             pPlayed.textContent = `Jogou: ${jogo.played ? "Sim" : "Não"}`;
             const pYear = document.createElement("p");
             pYear.textContent = `Ano: ${jogo.year}`;
+            const btnEdit = document.createElement("button");
+            btnEdit.textContent = "Editar";
+            btnEdit.setAttribute("type", "button");
+            btnEdit.classList.add("btn", "btn-primary");
+            btnEdit.onclick = function(){
+              abrirModalEdit();
+              if(closeModalBtn){
+                closeModalBtn.click();
+              }
+              
+            };
+
             div?.appendChild(pId);
             div?.appendChild(pTitle);
             div?.appendChild(pPlayed);
             div?.appendChild(pYear);
+            div?.appendChild(btnEdit);
     
             const modal = document.getElementById("myModal");
             if (modal) {
                 modal.style.display = "block";
-            
+          
             }
         }
         
@@ -98,7 +113,13 @@
    
 }
 
-const closeModalBtn = document.getElementById("closeModalBtn");
+function abrirModalEdit(){
+  const modal = document.getElementById("modal-edit");
+  if (modal) {
+    modal.style.display = "block";
+}
+}
+
 if (closeModalBtn) {
     closeModalBtn.addEventListener("click", () => {
         const modal = document.getElementById("myModal");
@@ -109,6 +130,16 @@ if (closeModalBtn) {
     });
 }
 
+if(closeModalEditBtn){
+  closeModalEditBtn.addEventListener("click", () => {
+    const modal = document.getElementById("modal-edit");
+    if (modal) {
+        modal.style.display = "none";
+        jogo = null;
+    }
+});
+}
+
 window.addEventListener("click", (event) => {
     const myModal = document.getElementById("myModal");
     if (myModal && event.target === myModal) {
@@ -117,8 +148,12 @@ window.addEventListener("click", (event) => {
     }
     const modal = document.getElementById("modal");
     if (modal && event.target === modal) {
-        modal.style.display = "none";
-        
+        modal.style.display = "none";    
+    }
+    const modalEdit = document.getElementById("modal-edit");
+    if (modalEdit && event.target === modalEdit) {
+        modalEdit.style.display = "none";
+        jogo = null;
     }
 });
 
