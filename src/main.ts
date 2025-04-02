@@ -1,8 +1,8 @@
  //* CRUD
  //? CREATE
  //? READ
- //UPDATE
- //DELETE
+ //? UPDATE
+ //? DELETE
 
   interface IJogo {
     id: string;
@@ -51,6 +51,37 @@
     }
   }
 
+  async function alterarJogo(jogo: IJogo) {
+    if(jogo.id !== ''){
+      const resposta = await fetch(`http://localhost:3500/games/${jogo.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: jogo.title,
+          played: jogo.played,
+          year: jogo.year,
+        }),
+      });
+      const dados = await resposta.json();
+      console.log("alterou o jogo", dados);
+    }
+  }
+
+  async function excluirJogo(id: string) {
+    if(id !== ''){
+      const resposta = await fetch(`http://localhost:3500/games/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const dados = await resposta.json();
+      console.log("excluiu o jogo", dados);
+    }
+  }
+
 
   function criarListaJogos(){
    // console.log("chamou criar lista de jogos")
@@ -95,12 +126,25 @@
               }
               
             };
+            const btnDelete = document.createElement("button");
+            btnDelete.textContent = "Excluir";
+            btnDelete.setAttribute("type", "button");
+            btnDelete.classList.add("btn", "btn-danger");
+            btnDelete.onclick = function(){
+              if(confirm("Tem certeza que deseja excluir este jogo?")){
+                excluirJogo(jogo!.id);
+                if(closeModalBtn){
+                  closeModalBtn.click();
+                }
+              }
+            };
 
             div?.appendChild(pId);
             div?.appendChild(pTitle);
             div?.appendChild(pPlayed);
             div?.appendChild(pYear);
             div?.appendChild(btnEdit);
+            div?.appendChild(btnDelete);
     
             const modal = document.getElementById("myModal");
             if (modal) {
@@ -118,6 +162,17 @@ function abrirModalEdit(){
   if (modal) {
     modal.style.display = "block";
 }
+  if(jogo){
+    const formEdit = document.getElementById("formEdit") as HTMLFormElement;
+    if(formEdit){
+      formEdit.reset();
+      const {idEdit, nome, ano, jogado} = formEdit;
+      idEdit.value = jogo.id;
+      nome.value = jogo.title;
+      ano.value = jogo.year;
+      jogado.value = jogo.played ? "Sim" : "Não";
+    }
+  }
 }
 
 if (closeModalBtn) {
@@ -175,6 +230,7 @@ const modal = document.getElementById('modal') as HTMLDivElement;
 //console.log(modal);
 const form = document.getElementById('form') as HTMLFormElement;
 //console.log(form);
+const formEdit = document.getElementById('formEdit') as HTMLFormElement;
 
 // Função para abrir o modal
 openModalBtn.addEventListener('click', () => {
@@ -225,6 +281,34 @@ form.addEventListener('submit', (event: SubmitEvent) => {
   //modal.classList.remove('open');
 });
 
+// Função para lidar com o envio do formulário de edição
+formEdit.addEventListener('submit', (event: SubmitEvent) => {
+  event.preventDefault(); // Impede o envio padrão do formulário
+  if (!formEdit.checkValidity()) {
+    event.stopPropagation();
+    console.log("Formulário inváido.");
+  }else{
+    console.log("Formulário válido.");
+
+    const{ idEdit, nome, ano, jogado} = formEdit;
+
+  // Exibe os valores no console
+  console.log('Id:', idEdit.value);
+  console.log('Nome:', nome.value);
+  console.log('Ano:', ano.value);
+  console.log('Jogado:', jogado.value);
+
+  alterarJogo({
+    id: idEdit.value, 
+    title: nome.value,
+    year: Number(ano.value),
+    played: jogado.value === "Sim" ? true : false,
+  })
+
+  }
+
+  formEdit.classList.add('was-validated');
+});
 
 
   

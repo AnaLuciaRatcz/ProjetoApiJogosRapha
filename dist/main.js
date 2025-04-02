@@ -2,8 +2,8 @@
 //* CRUD
 //? CREATE
 //? READ
-//UPDATE
-//DELETE
+//? UPDATE
+//? DELETE
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -53,6 +53,39 @@ function salvarJogo(jogo) {
         }
     });
 }
+function alterarJogo(jogo) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (jogo.id !== '') {
+            const resposta = yield fetch(`http://localhost:3500/games/${jogo.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    title: jogo.title,
+                    played: jogo.played,
+                    year: jogo.year,
+                }),
+            });
+            const dados = yield resposta.json();
+            console.log("alterou o jogo", dados);
+        }
+    });
+}
+function excluirJogo(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (id !== '') {
+            const resposta = yield fetch(`http://localhost:3500/games/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const dados = yield resposta.json();
+            console.log("excluiu o jogo", dados);
+        }
+    });
+}
 function criarListaJogos() {
     // console.log("chamou criar lista de jogos")
     const div = document.createElement("div");
@@ -93,11 +126,24 @@ function abrirModal() {
                     closeModalBtn.click();
                 }
             };
+            const btnDelete = document.createElement("button");
+            btnDelete.textContent = "Excluir";
+            btnDelete.setAttribute("type", "button");
+            btnDelete.classList.add("btn", "btn-danger");
+            btnDelete.onclick = function () {
+                if (confirm("Tem certeza que deseja excluir este jogo?")) {
+                    excluirJogo(jogo.id);
+                    if (closeModalBtn) {
+                        closeModalBtn.click();
+                    }
+                }
+            };
             div === null || div === void 0 ? void 0 : div.appendChild(pId);
             div === null || div === void 0 ? void 0 : div.appendChild(pTitle);
             div === null || div === void 0 ? void 0 : div.appendChild(pPlayed);
             div === null || div === void 0 ? void 0 : div.appendChild(pYear);
             div === null || div === void 0 ? void 0 : div.appendChild(btnEdit);
+            div === null || div === void 0 ? void 0 : div.appendChild(btnDelete);
             const modal = document.getElementById("myModal");
             if (modal) {
                 modal.style.display = "block";
@@ -109,6 +155,17 @@ function abrirModalEdit() {
     const modal = document.getElementById("modal-edit");
     if (modal) {
         modal.style.display = "block";
+    }
+    if (jogo) {
+        const formEdit = document.getElementById("formEdit");
+        if (formEdit) {
+            formEdit.reset();
+            const { idEdit, nome, ano, jogado } = formEdit;
+            idEdit.value = jogo.id;
+            nome.value = jogo.title;
+            ano.value = jogo.year;
+            jogado.value = jogo.played ? "Sim" : "Não";
+        }
     }
 }
 if (closeModalBtn) {
@@ -160,6 +217,7 @@ const modal = document.getElementById('modal');
 //console.log(modal);
 const form = document.getElementById('form');
 //console.log(form);
+const formEdit = document.getElementById('formEdit');
 // Função para abrir o modal
 openModalBtn.addEventListener('click', () => {
     modal.style.display = "block";
@@ -196,4 +254,28 @@ form.addEventListener('submit', (event) => {
     //const ano = (document.getElementById('ano') as HTMLInputElement).value;
     // Fecha o modal após o envio
     //modal.classList.remove('open');
+});
+// Função para lidar com o envio do formulário de edição
+formEdit.addEventListener('submit', (event) => {
+    event.preventDefault(); // Impede o envio padrão do formulário
+    if (!formEdit.checkValidity()) {
+        event.stopPropagation();
+        console.log("Formulário inváido.");
+    }
+    else {
+        console.log("Formulário válido.");
+        const { idEdit, nome, ano, jogado } = formEdit;
+        // Exibe os valores no console
+        console.log('Id:', idEdit.value);
+        console.log('Nome:', nome.value);
+        console.log('Ano:', ano.value);
+        console.log('Jogado:', jogado.value);
+        alterarJogo({
+            id: idEdit.value,
+            title: nome.value,
+            year: Number(ano.value),
+            played: jogado.value === "Sim" ? true : false,
+        });
+    }
+    formEdit.classList.add('was-validated');
 });
