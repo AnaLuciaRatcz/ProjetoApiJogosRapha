@@ -13,8 +13,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let listaJogos = [];
-let jogo = null;
+let listaJogos = []; //significa que é array?
+let jogo = null; //pq este nullo?
 const resultadoJogos = document.querySelector("#resultadoBuscaJogos");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const closeModalEditBtn = document.getElementById("closeModalEdit");
@@ -36,7 +36,7 @@ function carregarJogo(id) {
 }
 function salvarJogo(jogo) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (jogo.id === '') {
+        if (jogo.id === '') { //duvida???????????
             const resposta = yield fetch("http://localhost:3500/games", {
                 method: "POST",
                 headers: {
@@ -55,7 +55,7 @@ function salvarJogo(jogo) {
 }
 function alterarJogo(jogo) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (jogo.id !== '') {
+        if (jogo.id !== '') { //dúvida???????????
             const resposta = yield fetch(`http://localhost:3500/games/${jogo.id}`, {
                 method: "PUT",
                 headers: {
@@ -74,7 +74,7 @@ function alterarJogo(jogo) {
 }
 function excluirJogo(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (id !== '') {
+        if (id !== '') { //duvida??????????
             const resposta = yield fetch(`http://localhost:3500/games/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -99,9 +99,9 @@ function criarListaJogos() {
             yield carregarJogo(jogo.id);
             abrirModal();
         }));
-        div.appendChild(button);
+        div.appendChild(button); //duvida
     });
-    resultadoJogos === null || resultadoJogos === void 0 ? void 0 : resultadoJogos.appendChild(div);
+    resultadoJogos === null || resultadoJogos === void 0 ? void 0 : resultadoJogos.appendChild(div); //duvida
 }
 function abrirModal() {
     if (jogo) {
@@ -212,9 +212,7 @@ carregarListaJogos().then(() => {
 const openModalBtn = document.getElementById('openModalBtn');
 //console.log(openModalBtn);
 const closeModal = document.getElementById('closeModal');
-//console.log(closeModal);
 const modal = document.getElementById('modal');
-//console.log(modal);
 const form = document.getElementById('form');
 //console.log(form);
 const formEdit = document.getElementById('formEdit');
@@ -249,11 +247,6 @@ form.addEventListener('submit', (event) => {
         });
     }
     form.classList.add('was-validated');
-    // Captura os valores dos campos
-    //const nome = (document.getElementById('nome') as HTMLInputElement).value;
-    //const ano = (document.getElementById('ano') as HTMLInputElement).value;
-    // Fecha o modal após o envio
-    //modal.classList.remove('open');
 });
 // Função para lidar com o envio do formulário de edição
 formEdit.addEventListener('submit', (event) => {

@@ -16,7 +16,7 @@
 <body>
     <div class="meuContainer">
         <h1>Consulta de Jogos</h1>
-        <button type="button" class="btn btn-dark" id="openModalBtn"> Formulário JOGOS</button>
+        <button type="button" class="btn btn-dark" id="openModalBtn"> Formulário Jogos</button>
         <p>LISTA DE JOGOS</p>
         <div id="resultadoBuscaJogos"></div>
     </div>
@@ -26,8 +26,6 @@
             <div id="resultadoCarregarJogo"></div>
         </div>
     </div>
-
-
     <!-- Modal formulário -->
     <div id="modal" class="modal">
       <div class="modal-content">
@@ -41,8 +39,6 @@
                   Por favor digite o nome de um game.
                 </div>
               </div>
-
-
               <div class="col-md-6">
                 <label for="ano" class="form-label">Ano</label>
                 <input type="text" class="form-control" id="ano" name="ano" required>
@@ -50,8 +46,6 @@
                   Por favor digite o ano do game.
                 </div>
               </div>
-         
-          
           <div>
           <label>Jogado?</label>
           <div class="form-check">
@@ -67,8 +61,6 @@
             </label>
             <div class="invalid-feedback">Responda com sim ou não</div>
           </div>
-
-        
           </div>
           <p id="resultado"></p>
           <button type="submit" class="btn btn-danger">Salvar</button>
@@ -83,7 +75,6 @@
         <h2>Formulário de edição</h2>
         <form id="formEdit" novalidate>
           <input type="hidden" id="idEdit" name="idEdit">
-
             <div class="col-md-6">
                 <label for="nomeEdit" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nomeEdit" name="nome" required>
@@ -91,8 +82,6 @@
                   Por favor digite o nome de um game.
                 </div>
               </div>
-
-
               <div class="col-md-6">
                 <label for="anoEdit" class="form-label">Ano</label>
                 <input type="text" class="form-control" id="anoEdit" name="ano" required>
@@ -100,8 +89,6 @@
                   Por favor digite o ano do game.
                 </div>
               </div>
-         
-          
           <div>
           <label>Jogado?</label>
           <div class="form-check">
@@ -117,15 +104,10 @@
             </label>
             <div class="invalid-feedback">Responda com sim ou não</div>
           </div>
-
-        
           </div>
           <button type="submit" class="btn btn-primary">Alterar</button>
         </form>
       </div>
     </div>
-  
-
-
 </body>
 </html>
