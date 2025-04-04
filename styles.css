@@ -4,6 +4,11 @@
     padding: 0;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+}
+
 .meuContainer{
     
     background-color: rgb(182, 184, 185);
@@ -11,8 +16,7 @@
     border: 2px solid rgb(7, 14, 102);
     border-radius: 10px;
     text-align: center;
-    padding: 60px;
-    margin-left: 480px;   
+    padding: 60px; 
 }
 
 p{
@@ -29,8 +33,8 @@ p{
     cursor: pointer;
 }
 
-.btn btn-dark{
-    margin-bottom: 100px;
+.btn.btn-dark{
+    margin-bottom: 10px;
 }
 
 #form, h2 {

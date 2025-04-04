@@ -1,8 +1,9 @@
  //* CRUD
- //? CREATE
- //? READ
- //? UPDATE
- //? DELETE
+ //? CREATE {método POST} - não passa valores pela URL, mas sim pelo body
+ //? READ {método GET} - busca dados, não altera nada
+ //? UPDATE {método PUT} - altera os dados, mas não cria novos, passa dados pela URL e pelo body
+ ///? PATCH {método PATCH} - '' (igual o PUT) pode mudar só um dado***
+ //? DELETE {método DELETE} - deleta os dados, passa dados pela URL e não pelo body
 
   interface IJogo {
     id: string;
@@ -11,8 +12,8 @@
     year: number;
   }
 
-  let listaJogos: IJogo[] = []; //significa que é array?
-  let jogo: IJogo | null = null; //pq este nullo?
+  let listaJogos: IJogo[] = []; // inicia com array vazio
+  let jogo: IJogo | null = null; // ou é um jogo ou é nulo
 
   const resultadoJogos = document.querySelector("#resultadoBuscaJogos");
   const closeModalBtn = document.getElementById("closeModalBtn");
@@ -34,7 +35,7 @@
   }
 
   async function salvarJogo(jogo: IJogo) {
-    if(jogo.id === ''){ //duvida???????????
+    if(jogo.id === ''){ //jogo zerado não tem id, backend vai criar o id
       const resposta = await fetch("http://localhost:3500/games", {
         method: "POST",
         headers: {
@@ -52,7 +53,7 @@
   }
 
   async function alterarJogo(jogo: IJogo) {
-    if(jogo.id !== ''){ //dúvida???????????
+    if(jogo.id !== ''){ // o id tem que ser diferente de nada, obrigatório ter um id
       const resposta = await fetch(`http://localhost:3500/games/${jogo.id}`, {
         method: "PUT",
         headers: {
@@ -70,7 +71,7 @@
   }
 
   async function excluirJogo(id: string) {
-    if(id !== ''){ //duvida??????????
+    if(id !== ''){ // precisa ter um id
       const resposta = await fetch(`http://localhost:3500/games/${id}`, {
         method: "DELETE",
         headers: {
@@ -84,21 +85,21 @@
 
   function criarListaJogos(){
    // console.log("chamou criar lista de jogos")
-   const div = document.createElement("div");
+   const div = document.createElement("div"); //cria uma div para guardar a lista de jogos
    div.classList.add("list-group");// list-group é uma classe do bootstreap
-   listaJogos.forEach((jogo)=>{
-    const button = document.createElement("button");
-    button.setAttribute("type", "button");
-    button.textContent = jogo.title;
-    button.classList.add("list-group-item");// bootstreap
-    button.addEventListener("click", async () => {
+   listaJogos.forEach((jogo)=>{ //passar por cada jogo criado
+    const button = document.createElement("button"); //cria um botão
+    button.setAttribute("type", "button"); //tipagem do botão
+    button.textContent = jogo.title;//texto do botão
+    button.classList.add("list-group-item");// bootstreap adicionou classe
+    button.addEventListener("click", async () => { //função de carregar o jogo
          await carregarJogo(jogo.id);
-         abrirModal();
+         abrirModal(); //abrir o modal
     });
-    div.appendChild(button); //duvida
+    div.appendChild(button); //adiciona o botao na div criada acima na linha 88
    });
 
-    resultadoJogos?.appendChild(div);//duvida
+    resultadoJogos?.appendChild(div);//recebe a div criada na linha 88
   }
 
   function abrirModal() {
@@ -138,7 +139,7 @@
               }
             };
 
-            div?.appendChild(pId);
+            div?.appendChild(pId); //adicionando cada elemento criado na div
             div?.appendChild(pTitle);
             div?.appendChild(pPlayed);
             div?.appendChild(pYear);
@@ -147,7 +148,7 @@
     
             const modal = document.getElementById("myModal");
             if (modal) {
-                modal.style.display = "block";
+                modal.style.display = "block"; //block significa exiba como um bloco
             }
         }   
     }   
@@ -175,8 +176,8 @@ if (closeModalBtn) {
     closeModalBtn.addEventListener("click", () => {
         const modal = document.getElementById("myModal");
         if (modal) {
-            modal.style.display = "none";
-            jogo = null;
+            modal.style.display = "none"; //esconder o modal
+            jogo = null; //limpar a variavel do jogo
         }
     });
 }
@@ -191,7 +192,7 @@ if(closeModalEditBtn){
 });
 }
 
-window.addEventListener("click", (event) => { //duvida
+window.addEventListener("click", (event) => { //variavel que corresponde a nossa janela, fechar o modal se clicar na janela
     const myModal = document.getElementById("myModal");
     if (myModal && event.target === myModal) {
         myModal.style.display = "none";
@@ -208,13 +209,12 @@ window.addEventListener("click", (event) => { //duvida
     }
 });
 
-  carregarListaJogos().then(()=>{
+  carregarListaJogos().then(()=>{//se existe ao menos um jogo a lista vai ser criada
     if(listaJogos.length > 0){
         criarListaJogos();
     }
   });
 
-  //--------------------------------------------
 // Seleciona os elementos do DOM
 const openModalBtn = document.getElementById('openModalBtn') as HTMLButtonElement;
 //console.log(openModalBtn);

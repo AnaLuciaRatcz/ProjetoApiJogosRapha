@@ -1,9 +1,10 @@
 "use strict";
 //* CRUD
-//? CREATE
-//? READ
-//? UPDATE
-//? DELETE
+//? CREATE {método POST} - não passa valores pela URL, mas sim pelo body
+//? READ {método GET} - busca dados, não altera nada
+//? UPDATE {método PUT} - altera os dados, mas não cria novos, passa dados pela URL e pelo body
+///? PATCH {método PATCH} - '' (igual o PUT) pode mudar só um dado***
+//? DELETE {método DELETE} - deleta os dados, passa dados pela URL e não pelo body
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -13,8 +14,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-let listaJogos = []; //significa que é array?
-let jogo = null; //pq este nullo?
+let listaJogos = []; // inicia com array vazio
+let jogo = null; // ou é um jogo ou é nulo
 const resultadoJogos = document.querySelector("#resultadoBuscaJogos");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const closeModalEditBtn = document.getElementById("closeModalEdit");
@@ -36,7 +37,7 @@ function carregarJogo(id) {
 }
 function salvarJogo(jogo) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (jogo.id === '') { //duvida???????????
+        if (jogo.id === '') { //jogo zerado não tem id, backend vai criar o id
             const resposta = yield fetch("http://localhost:3500/games", {
                 method: "POST",
                 headers: {
@@ -55,7 +56,7 @@ function salvarJogo(jogo) {
 }
 function alterarJogo(jogo) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (jogo.id !== '') { //dúvida???????????
+        if (jogo.id !== '') { // o id tem que ser diferente de nada, obrigatório ter um id
             const resposta = yield fetch(`http://localhost:3500/games/${jogo.id}`, {
                 method: "PUT",
                 headers: {
@@ -74,7 +75,7 @@ function alterarJogo(jogo) {
 }
 function excluirJogo(id) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (id !== '') { //duvida??????????
+        if (id !== '') { // precisa ter um id
             const resposta = yield fetch(`http://localhost:3500/games/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -88,20 +89,20 @@ function excluirJogo(id) {
 }
 function criarListaJogos() {
     // console.log("chamou criar lista de jogos")
-    const div = document.createElement("div");
+    const div = document.createElement("div"); //cria uma div para guardar a lista de jogos
     div.classList.add("list-group"); // list-group é uma classe do bootstreap
     listaJogos.forEach((jogo) => {
-        const button = document.createElement("button");
-        button.setAttribute("type", "button");
-        button.textContent = jogo.title;
-        button.classList.add("list-group-item"); // bootstreap
+        const button = document.createElement("button"); //cria um botão
+        button.setAttribute("type", "button"); //tipagem do botão
+        button.textContent = jogo.title; //texto do botão
+        button.classList.add("list-group-item"); // bootstreap adicionou classe
         button.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
             yield carregarJogo(jogo.id);
-            abrirModal();
+            abrirModal(); //abrir o modal
         }));
-        div.appendChild(button); //duvida
+        div.appendChild(button); //adiciona o botao na div criada acima na linha 88
     });
-    resultadoJogos === null || resultadoJogos === void 0 ? void 0 : resultadoJogos.appendChild(div); //duvida
+    resultadoJogos === null || resultadoJogos === void 0 ? void 0 : resultadoJogos.appendChild(div); //recebe a div criada na linha 88
 }
 function abrirModal() {
     if (jogo) {
@@ -138,7 +139,7 @@ function abrirModal() {
                     }
                 }
             };
-            div === null || div === void 0 ? void 0 : div.appendChild(pId);
+            div === null || div === void 0 ? void 0 : div.appendChild(pId); //adicionando cada elemento criado na div
             div === null || div === void 0 ? void 0 : div.appendChild(pTitle);
             div === null || div === void 0 ? void 0 : div.appendChild(pPlayed);
             div === null || div === void 0 ? void 0 : div.appendChild(pYear);
@@ -146,7 +147,7 @@ function abrirModal() {
             div === null || div === void 0 ? void 0 : div.appendChild(btnDelete);
             const modal = document.getElementById("myModal");
             if (modal) {
-                modal.style.display = "block";
+                modal.style.display = "block"; //block significa exiba como um bloco
             }
         }
     }
@@ -172,8 +173,8 @@ if (closeModalBtn) {
     closeModalBtn.addEventListener("click", () => {
         const modal = document.getElementById("myModal");
         if (modal) {
-            modal.style.display = "none";
-            jogo = null;
+            modal.style.display = "none"; //esconder o modal
+            jogo = null; //limpar a variavel do jogo
         }
     });
 }
@@ -207,7 +208,6 @@ carregarListaJogos().then(() => {
         criarListaJogos();
     }
 });
-//--------------------------------------------
 // Seleciona os elementos do DOM
 const openModalBtn = document.getElementById('openModalBtn');
 //console.log(openModalBtn);
