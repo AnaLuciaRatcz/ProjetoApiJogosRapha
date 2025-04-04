@@ -11,8 +11,8 @@
     year: number;
   }
 
-  let listaJogos: IJogo[] = [];
-  let jogo: IJogo | null = null;
+  let listaJogos: IJogo[] = []; //significa que é array?
+  let jogo: IJogo | null = null; //pq este nullo?
 
   const resultadoJogos = document.querySelector("#resultadoBuscaJogos");
   const closeModalBtn = document.getElementById("closeModalBtn");
@@ -27,14 +27,14 @@
   }
 
   async function carregarJogo(id:string) {
-   const resultado = await fetch(`http://localhost:3500/games/${id}`);
+   const resultado = await fetch (`http://localhost:3500/games/${id}`);
    const dados = await resultado.json() as IJogo;  
    console.log("carregou o jogo", dados);
    jogo = dados;
   }
 
   async function salvarJogo(jogo: IJogo) {
-    if(jogo.id === ''){
+    if(jogo.id === ''){ //duvida???????????
       const resposta = await fetch("http://localhost:3500/games", {
         method: "POST",
         headers: {
@@ -52,7 +52,7 @@
   }
 
   async function alterarJogo(jogo: IJogo) {
-    if(jogo.id !== ''){
+    if(jogo.id !== ''){ //dúvida???????????
       const resposta = await fetch(`http://localhost:3500/games/${jogo.id}`, {
         method: "PUT",
         headers: {
@@ -70,7 +70,7 @@
   }
 
   async function excluirJogo(id: string) {
-    if(id !== ''){
+    if(id !== ''){ //duvida??????????
       const resposta = await fetch(`http://localhost:3500/games/${id}`, {
         method: "DELETE",
         headers: {
@@ -81,7 +81,6 @@
       console.log("excluiu o jogo", dados);
     }
   }
-
 
   function criarListaJogos(){
    // console.log("chamou criar lista de jogos")
@@ -96,10 +95,10 @@
          await carregarJogo(jogo.id);
          abrirModal();
     });
-    div.appendChild(button);
+    div.appendChild(button); //duvida
    });
 
-    resultadoJogos?.appendChild(div);
+    resultadoJogos?.appendChild(div);//duvida
   }
 
   function abrirModal() {
@@ -149,12 +148,9 @@
             const modal = document.getElementById("myModal");
             if (modal) {
                 modal.style.display = "block";
-          
             }
-        }
-        
-    }
-   
+        }   
+    }   
 }
 
 function abrirModalEdit(){
@@ -195,7 +191,7 @@ if(closeModalEditBtn){
 });
 }
 
-window.addEventListener("click", (event) => {
+window.addEventListener("click", (event) => { //duvida
     const myModal = document.getElementById("myModal");
     if (myModal && event.target === myModal) {
         myModal.style.display = "none";
@@ -218,16 +214,12 @@ window.addEventListener("click", (event) => {
     }
   });
 
-
-
   //--------------------------------------------
 // Seleciona os elementos do DOM
 const openModalBtn = document.getElementById('openModalBtn') as HTMLButtonElement;
 //console.log(openModalBtn);
 const closeModal = document.getElementById('closeModal') as HTMLButtonElement;
-//console.log(closeModal);
 const modal = document.getElementById('modal') as HTMLDivElement;
-//console.log(modal);
 const form = document.getElementById('form') as HTMLFormElement;
 //console.log(form);
 const formEdit = document.getElementById('formEdit') as HTMLFormElement;
@@ -237,7 +229,6 @@ openModalBtn.addEventListener('click', () => {
   modal.style.display = "block";
   //console.log("clicou");
 });
-
 
 // Função para fechar o modal
 closeModal.addEventListener('click', () => {
@@ -266,19 +257,8 @@ form.addEventListener('submit', (event: SubmitEvent) => {
     year: Number(ano.value),
     played: jogado.value === "Sim" ? true : false,
   })
-
   }
-
   form.classList.add('was-validated');
-
-  // Captura os valores dos campos
-  //const nome = (document.getElementById('nome') as HTMLInputElement).value;
-  //const ano = (document.getElementById('ano') as HTMLInputElement).value;
-
-  
-
-  // Fecha o modal após o envio
-  //modal.classList.remove('open');
 });
 
 // Função para lidar com o envio do formulário de edição
@@ -304,7 +284,6 @@ formEdit.addEventListener('submit', (event: SubmitEvent) => {
     year: Number(ano.value),
     played: jogado.value === "Sim" ? true : false,
   })
-
   }
 
   formEdit.classList.add('was-validated');
